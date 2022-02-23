@@ -1,7 +1,7 @@
 <?php
-use App\Http\Controllers\PushController;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PushController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +14,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+Route::middleware(['auth'])->group(function(){
+
+
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+
 Route::get('test', function () {
     event(new App\Events\StatusLiked('Someone'));
     return "Event has been sent!";
 });
 Route::get('user_first',[PushController::class,'user_first']);
-Route::get('user_second',[PushController::class,'user_second']);
+Route::get('dash/{id}',[PushController::class,'chat']);
+Route::post('/store_comment',[PushController::class,'send']);
+
+
+
+
+
+});
