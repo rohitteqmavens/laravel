@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Events\StatusLiked;
 
 
 
@@ -26,8 +27,8 @@ class PushController extends Controller
         // $id = $users->id;
         $all_user = User::find($id);//the another person with whom we are chatting
         // dd($all_user);
-        $chat_other=Chat::get()->where('sender','=',$all_user->id);
-        $chat_me=Chat::get()->where('sender','=',$users->id);
+        $chat_other=Chat::get()->where('sender','=',$all_user->id,'AND','reciever','=',$users->id);
+        $chat_me=Chat::limit(12)->get()->where('sender','=',$users->id,'AND','reciever','=',$all_user->id);
 
         return view('messages', compact('all_user', 'users','chat_other','chat_me'));
     }
@@ -45,11 +46,15 @@ class PushController extends Controller
         $chat->message=$request->message;
         // dd($chat);
 
+        $getUserName=User::find($request->reciever);
+        $getUserName->message=$request->message;
 
-
+        // dd($getUserName);
         if ($chat->save()) {
+            event(new StatusLiked($getUserName));
             return  redirect()->back();
         }
     }
 }
 //sdfskdhfsdkhfksdjhfksdhfdhfdkjhdkfhksvnkdskfhderoreorueour
+

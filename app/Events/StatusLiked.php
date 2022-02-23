@@ -14,7 +14,7 @@ class StatusLiked implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-
+    // public $getUserName;
     public $username;
 
     public $message;
@@ -23,10 +23,10 @@ class StatusLiked implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($username)
+    public function __construct($getUserName)
     {
-        $this->username = $username;
-        $this->message  = "{$username} liked your status";
+        $this->username = $getUserName->name ."sent you a message";
+        $this->message  = $getUserName->message;
     }
 
     /**

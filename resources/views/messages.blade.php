@@ -88,52 +88,64 @@ integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
         <div class="card">
 
             @foreach ($chat_other as $reciv)
-                <div class="col-12">
+            <div class="col-12">
                     <div class="recieve">
                         <td>
                             {{ $reciv->message }}
                         </td>
                     </div>
                 </div>
+                @endforeach
+                @foreach ($chat_me as $send)
+
+            <div class="col-12 ">
+                <div class="sender">
+                    <td>
+
+                        {{ $send->message }}
+
+                    </td>
+                </div>
+            </div>
             @endforeach
-            @foreach ($chat_me as $send)
-                <div class="col-12 ">
-                    <div class="sender">
-                        <td>
+        </div>
 
-                            {{ $send->message }}
+        <div class="form">
+            <form action="{{ url('/store_comment') }}" method="POST">
+                @csrf
+                <div class="mb-3 text-center">
+                    <label for="" class="form-label"></label>
+                    <input type="text" class="form-control" name="message" id="message" aria-describedby="helpId"
+                        placeholder="">
+                    @error('message')
+                        {{ $message }}
+                        @endif
+                        <input type="text" class="form-control" name="reciever" id="reciever" aria-describedby="helpId"
+                            placeholder="" value="{{ $all_user->id }}" hidden>
+                        <input type="text" class="form-control" name="sender" id="sender" aria-describedby="helpId"
+                            placeholder="" value="{{ $users->id }}" hidden>
 
-                        </td>
+
+
                     </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-    <div class="form">
-        <form action="{{ url('/store_comment') }}" method="POST">
-            @csrf
-            <div class="mb-3 text-center">
-                <label for="" class="form-label"></label>
-                <input type="text" class="form-control" name="message" id="message" aria-describedby="helpId"
-                    placeholder="">
-                @error('message')
-                    {{ $message }}
-                    @endif
-                    <input type="text" class="form-control" name="reciever" id="reciever" aria-describedby="helpId"
-                        placeholder="" value="{{ $all_user->id }}" hidden>
-                    <input type="text" class="form-control" name="sender" id="sender" aria-describedby="helpId"
-                        placeholder="" value="{{ $users->id }}" hidden>
 
-
-
-                </div>
-
-                <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-        </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
         </div>
 
 
     </body>
 
     </html>
+    <script>
+        Push.create("Hello world!", {
+            body: "How's it hangin'?",
+            icon: '/icon.png',
+            timeout: 4000,
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+        });
+        </script>
