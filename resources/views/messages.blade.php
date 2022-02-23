@@ -13,37 +13,43 @@
 
 
 
-        <style>
-            .card{
-                height: 500px;
-            }
-            .chat{
-                margin-block: 30px;
-            }
-            .card{
-                margin-left: 180px;
-                border-color: black;
-            }
-            .card-body{
-                margin-left: 180px;
-    border-color: black;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: 0.25rem;
-            }
-            .sender{
-               float: right;
-            }
-            .recieve{
-                float: left;
-            }
-        </style>
+    <style>
+        .card {
+            height: 500px;
+        }
+
+        .chat {
+            margin-block: 30px;
+        }
+
+        .card {
+            margin-left: 180px;
+            border-color: black;
+        }
+
+        .form {
+            margin-left: 180px;
+            border-color: black;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: 0.25rem;
+        }
+
+        .sender {
+            float: right;
+        }
+
+        .recieve {
+            float: left;
+        }
+
+    </style>
 </head>
 
 <!-- Bootstrap JavaScript Libraries -->
@@ -74,44 +80,49 @@ integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
     <h1>Pusher Test</h1>
 
 
-        <div class="col-8 ">
-            <p >
+    <div class="col-8 ">
+        <p>
+        <h3 class="text-center">
+            {{ $all_user->name }}</h3>
+        </p>
+        <div class="card">
 
+            @foreach ($chat_other as $reciv)
+                <div class="col-12">
+                    <div class="recieve">
+                        <td>
+                            {{ $reciv->message }}
+                        </td>
+                    </div>
+                </div>
+            @endforeach
+            @foreach ($chat_me as $send)
+                <div class="col-12 ">
+                    <div class="sender">
+                        <td>
 
-              <h3 class="text-center">
-                   {{$all_user->name}}</h3>
+                            {{ $send->message }}
 
-
-           </p>
-            <div class="card" >
-<div class="col-12">
-    <div class="recieve">
-<td>
-@foreach ($chat_other as $reciv)
-{{$reciv->message}}
-@endforeach
-
-</td></div>
-</div><div class="col-12 ">
-    <div class="sender">
-<td >
-hiii
-</td></div></div>
-            </div>
-<div class="card-body">
-    <form action="{{url('/store_comment')}}" method="POST">
-        @csrf
-                <div class="mb-3 text-center">
-                    <label for="" class="form-label"></label>
-                    <input type="text" class="form-control" name="message" id="message" aria-describedby="helpId"
-                        placeholder="">
-                        @error('message')
-                            {{$message}}
-                        @endif
-                        <input type="text" class="form-control" name="reciever" id="reciever" aria-describedby="helpId"
-                        placeholder="" value="{{$all_user->id}}" hidden>
-                        <input type="text" class="form-control" name="sender" id="sender" aria-describedby="helpId"
-                        placeholder="" value="{{$users->id}}" hidden>
+                        </td>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="form">
+        <form action="{{ url('/store_comment') }}" method="POST">
+            @csrf
+            <div class="mb-3 text-center">
+                <label for="" class="form-label"></label>
+                <input type="text" class="form-control" name="message" id="message" aria-describedby="helpId"
+                    placeholder="">
+                @error('message')
+                    {{ $message }}
+                    @endif
+                    <input type="text" class="form-control" name="reciever" id="reciever" aria-describedby="helpId"
+                        placeholder="" value="{{ $all_user->id }}" hidden>
+                    <input type="text" class="form-control" name="sender" id="sender" aria-describedby="helpId"
+                        placeholder="" value="{{ $users->id }}" hidden>
 
 
 
@@ -120,9 +131,9 @@ hiii
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>
-    </div>
+        </div>
 
 
-</body>
+    </body>
 
-</html>
+    </html>

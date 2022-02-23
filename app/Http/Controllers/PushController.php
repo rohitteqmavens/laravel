@@ -27,8 +27,9 @@ class PushController extends Controller
         $all_user = User::find($id);//the another person with whom we are chatting
         // dd($all_user);
         $chat_other=Chat::get()->where('sender','=',$all_user->id);
+        $chat_me=Chat::get()->where('sender','=',$users->id);
 
-        return view('messages', compact('all_user', 'users','chat_other'));
+        return view('messages', compact('all_user', 'users','chat_other','chat_me'));
     }
     public function send(Request $request,Chat $chat)
     {
@@ -47,7 +48,7 @@ class PushController extends Controller
 
 
         if ($chat->save()) {
-            // return redirect('/user_first');
+            return  redirect()->back();
         }
     }
 }
