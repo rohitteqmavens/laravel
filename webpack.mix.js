@@ -16,3 +16,5 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('tailwindcss'),
     require('autoprefixer'),
 ]);
+mix.copy('node_modules/push.js/bin/push.min.js', 'public/assets/js/push.min.js');
+mix.copy('node_modules/push.js/bin/push.js', 'public/assets/js/push.js');

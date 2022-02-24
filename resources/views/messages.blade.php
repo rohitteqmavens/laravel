@@ -12,6 +12,8 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
     <style>
         .card {
@@ -58,6 +60,7 @@ integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
 integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="/assets/js/push.min.js"></script>
 
 <body>
 
@@ -71,7 +74,9 @@ integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
 
         var channel = pusher.subscribe('status-liked');
         channel.bind('status-liked', function(data) {
-            alert(JSON.stringify(data));
+
+        Push.create("hello");
+
 
         });
     </script>
@@ -139,13 +144,7 @@ integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
 
     </html>
     <script>
-        Push.create("Hello world!", {
-            body: "How's it hangin'?",
-            icon: '/icon.png',
-            timeout: 4000,
-            onClick: function () {
-                window.focus();
-                this.close();
-            }
-        });
+    //       $(document).ready(function(){
+    //     Push.create("hello i m back");
+    // });
         </script>
