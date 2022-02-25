@@ -48,9 +48,6 @@ integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
         });
     </script>
 
-
-    <h1>Pusher Test</h1>
-
     <div class="row">
         <div class="col-3 text-center card ">
 @foreach($all_user as $userall )

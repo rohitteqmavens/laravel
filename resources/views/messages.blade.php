@@ -76,14 +76,24 @@ integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
         channel.bind('status-liked', function(data) {
             // alert(JSON.stringify(data));
 
-        Push.create(JSON.stringify(data));
+            Push.Permission.DEFAULT; // 'default'
+Push.Permission.GRANTED; // 'granted'
+Push.Permission.DENIED; // 'denied'
 
+        Push.create("New Message", {
+
+
+    body: JSON.stringify(data),
+    icon: '/icon.png',
+    timeout: 4000,
+    onClick: function () {
+        window.focus();
+        this.close();
+    }
+});
 
         });
     </script>
-
-
-    <h1>Pusher Test</h1>
 
 
     <div class="col-8 ">

@@ -46,17 +46,28 @@ class PushController extends Controller
         $chat->message=$request->message;
         // dd($chat);
 
-        $getUserName=User::find($request->reciever);
-        $getUserName->message=$request->message;
+
 
         // dd($getUserName);
         if ($chat->save()) {
 
 
-                broadcast(new StatusLiked($getUserName))->toOthers();
+                broadcast(new StatusLiked($chat))->toOthers();
 
             return  redirect()->back();
         }
+    }
+    public function home_page(){
+
+        $users = Auth::user();
+        $id = $users->id;
+        $all_user = User::get()->where('id', '!=', $id);
+        // dd($all_user);
+
+        return view('home', compact('all_user', 'users'));
+
+
+
     }
 }
 //sdfskdhfsdkhfksdjhfksdhfdhfdkjhdkfhksvnkdskfhderoreorueour
