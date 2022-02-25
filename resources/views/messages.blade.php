@@ -66,7 +66,7 @@ integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
 
     <script>
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+        // Pusher.logToConsole = true;
 
         var pusher = new Pusher('fea8bb5cfc56957f9a90', {
             cluster: 'ap2'
@@ -74,8 +74,9 @@ integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
 
         var channel = pusher.subscribe('status-liked');
         channel.bind('status-liked', function(data) {
+            // alert(JSON.stringify(data));
 
-        Push.create("hello");
+        Push.create(JSON.stringify(data));
 
 
         });

@@ -10,6 +10,9 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+use Illuminate\Support\Facades\Auth;
+
+
 class StatusLiked implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -25,7 +28,7 @@ class StatusLiked implements ShouldBroadcast
      */
     public function __construct($getUserName)
     {
-        $this->username = $getUserName->name ."sent you a message";
+        $this->username = $getUserName->name. " sent you a message";
         $this->message  = $getUserName->message;
     }
 
@@ -38,11 +41,9 @@ class StatusLiked implements ShouldBroadcast
     {
         return ['status-liked'];
     }
-    public function broadcastAs() {
+    public function broadcastAs()
+    {
 
         return 'status-liked';
-
-        }
-
-
+    }
 }

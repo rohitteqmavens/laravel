@@ -1,39 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS v5.0.2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
+    .img{
+        height: 95%;
+        width: 100%
 
-<!DOCTYPE html>
-<head>
-  <title>Pusher Test</title>
-  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-  <script>
+    }
+   body{
+        background-attachment: fixed;
+    }
+</style>
+  </head>
+  <body>
 
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-    var pusher = new Pusher('fea8bb5cfc56957f9a90', {
-      cluster: 'ap2'
-    });
-
-    var channel = pusher.subscribe('status-liked');
-    channel.bind('status-liked', function(data) {
-        alert(JSON.stringify(data));
-
-    });
-
-
-
-
-
-
-
-  </script>
-</head>
-<body>
-  <h1>Pusher Test</h1>
-  <p>
-    Try publishing an event to channel <code>my-channel</code>
-    with event name <code>my-event</code>.
-  </p>
-</body>
+<img src="/img/back.jpg" alt="only background" class="img">
 
 
 
+  </body>
+</html>

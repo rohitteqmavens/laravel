@@ -51,7 +51,10 @@ class PushController extends Controller
 
         // dd($getUserName);
         if ($chat->save()) {
-            event(new StatusLiked($getUserName));
+
+
+                broadcast(new StatusLiked($getUserName))->toOthers();
+
             return  redirect()->back();
         }
     }
