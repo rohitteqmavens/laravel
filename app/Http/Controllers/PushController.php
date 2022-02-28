@@ -51,6 +51,7 @@ class PushController extends Controller
         // dd($getUserName);
         if ($chat->save()) {
 
+            $chat->name=Auth::user()->name;
 
                 broadcast(new StatusLiked($chat))->toOthers();
 
@@ -68,6 +69,12 @@ class PushController extends Controller
 
 
 
+    }
+    public function enterChat(){
+        if(request()->ajax()){
+            dd(request()->all());
+
+        }
     }
 }
 //sdfskdhfsdkhfksdjhfksdhfdhfdkjhdkfhksvnkdskfhderoreorueour

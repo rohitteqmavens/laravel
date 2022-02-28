@@ -134,7 +134,7 @@ Push.Permission.DENIED; // 'denied'
                     <input type="text" class="form-control" name="message" id="message" aria-describedby="helpId"
                         placeholder="">
                     @error('message')
-                        {{ $message }}
+                        {{ $message =" "}}
                         @endif
                         <input type="text" class="form-control" name="reciever" id="reciever" aria-describedby="helpId"
                             placeholder="" value="{{ $all_user->id }}" hidden>

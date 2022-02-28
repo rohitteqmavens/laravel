@@ -38,6 +38,7 @@ Route::get('user_first',[PushController::class,'user_first']);
 Route::get('dash/{id}',[PushController::class,'chat']);
 Route::post('/store_comment',[PushController::class,'send']);
 Route::get('/chat',[PushController::class,'home_page']);
+Route::post('/enterChat',[PushController::class,'enterChat']);
 
 
 

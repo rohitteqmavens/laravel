@@ -40,22 +40,20 @@
                     <div class="card-body contacts_body">
                         <ul class="contacts">
                             @foreach ($all_user as $user)
-
-                            <a href="#" class="">
-                            <li class="active">
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="/img/user3.jpeg"
-                                            class="rounded-circle user_img">
-                                        <span class="online_icon"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>{{$user->name}}</span>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
+                                <a href="#" class="">
+                                    <li class="active">
+                                        <div class="d-flex bd-highlight">
+                                            <div class="img_cont">
+                                                <img src="/img/user3.jpeg" class="rounded-circle user_img">
+                                                <span class="online_icon"></span>
+                                            </div>
+                                            <div class="user_info">
+                                                <span>{{ $user->name }}</span>
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </a>
                             @endforeach
 
 
@@ -69,8 +67,7 @@
                     <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
                             <div class="img_cont">
-                                <img src="/img/user3.jpeg"
-                                    class="rounded-circle user_img">
+                                <img src="/img/user3.jpeg" class="rounded-circle user_img">
                                 <span class="online_icon"></span>
                             </div>
                             <div class="user_info">
@@ -95,8 +92,7 @@
                     <div class="card-body msg_card_body">
                         <div class="d-flex justify-content-start mb-4">
                             <div class="img_cont_msg">
-                                <img src="/img/user2.jpeg"
-                                    class="rounded-circle user_img_msg">
+                                <img src="/img/user2.jpeg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 Hi, how are you samim?
@@ -109,14 +105,12 @@
                                 <span class="msg_time_send">8:55 AM, Today</span>
                             </div>
                             <div class="img_cont_msg">
-                                <img src="/img/user.png"
-                                    class="rounded-circle user_img_msg">
+                                <img src="/img/user.png" class="rounded-circle user_img_msg">
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mb-4">
                             <div class="img_cont_msg">
-                                <img src="/img/user2.jpeg"
-                                    class="rounded-circle user_img_msg">
+                                <img src="/img/user2.jpeg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 I am good too, thank you for your chat template
@@ -129,14 +123,12 @@
                                 <span class="msg_time_send">9:05 AM, Today</span>
                             </div>
                             <div class="img_cont_msg">
-                                <img src="/img/user.png"
-                                    class="rounded-circle user_img_msg">
+                                <img src="/img/user.png" class="rounded-circle user_img_msg">
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mb-4">
                             <div class="img_cont_msg">
-                                <img src="/img/user2.jpeg"
-                                    class="rounded-circle user_img_msg">
+                                <img src="/img/user2.jpeg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 I am looking for your next templates
@@ -149,14 +141,12 @@
                                 <span class="msg_time_send">9:10 AM, Today</span>
                             </div>
                             <div class="img_cont_msg">
-                                <img src="/img/user.png"
-                                    class="rounded-circle user_img_msg">
+                                <img src="/img/user.png" class="rounded-circle user_img_msg">
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mb-4">
                             <div class="img_cont_msg">
-                                <img src="/img/user2.jpeg"
-                                    class="rounded-circle user_img_msg">
+                                <img src="/img/user2.jpeg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 Bye, see you
@@ -165,15 +155,29 @@
                         </div>
                     </div>
                     <div class="card-footer">
+            <form  method="POST" id="chat_form">
+                @csrf
+
                         <div class="input-group">
                             <div class="input-group-append">
                                 <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
                             </div>
-                            <textarea name="" class="form-control type_msg"
-                                placeholder="Type your message..."></textarea>
+                            <input type="text" class="form-control type_msg" name="message" id="message" aria-describedby="helpId"
+                            placeholder="     @error('message')
+                            {{ $message=" nothing to send" }}
+                            @endif">
+                            <input type="text" class="form-control" name="reciever" id="reciever" aria-describedby="helpId"
+                            placeholder="" value="here we set another user id" hidden>
+                        <input type="text" class="form-control" name="sender" id="sender" aria-describedby="helpId"
+                            placeholder="" value="{{ $users->id }}" hidden>
+
+
+                            {{-- <textarea name="" class="form-control type_msg"
+                                placeholder="Type your message..."></textarea> --}}
                             <div class="input-group-append">
-                                <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                                <span class="input-group-text send_btn"> <button type="submit" id="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></button></i></span>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -182,13 +186,44 @@
     </div>
 </body>
 <footer>
-<script>
-    	$(document).ready(function(){
-$('#action_menu_btn').click(function(){
-	$('.action_menu').toggle();
-});
-	});
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#action_menu_btn').click(function() {
+                $('.action_menu').toggle();
+            });
+            $('#chat_form').submit(function(){
+
+                console.log($('message').val(),$('reciever').val(),$('sender').val());
+
+
+
+
+$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+                $.ajax({
+                    url:"/enterChat",
+                    method:"POST",
+                    data:{
+                        message:$('message').val(),
+                        reciever:$('reciever').val(),
+                        sender:$('sender').val(),
+                    },
+                    success: function(response) {
+                $('#chat_form')[0].reset();
+                alert("comment added" );
+
+
+                    }
+
+
+
+        });
+    </script>
+
 </footer>
 
 </html>
