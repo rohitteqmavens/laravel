@@ -20,7 +20,43 @@
     </script>
     <link rel="stylesheet" href="/css/chat.css">
 
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="/assets/js/push.min.js"></script>
 
+    <body>
+
+        <script>
+            // Enable pusher logging - don't include this in production
+            // Pusher.logToConsole = true;
+
+            var pusher = new Pusher('fea8bb5cfc56957f9a90', {
+                cluster: 'ap2'
+            });
+
+            var channel = pusher.subscribe('status-liked');
+            channel.bind('status-liked', function(data) {
+                // alert(JSON.stringify(data));
+
+                Push.Permission.DEFAULT; // 'default'
+                Push.Permission.GRANTED; // 'granted'
+                Push.Permission.DENIED; // 'denied'
+
+                if(Push.create("New Message", {
+
+
+                    body: JSON.stringify(data),
+                    icon: '/icon.png',
+                    timeout: 4000,
+                    onClick: function() {
+                        window.focus();
+                        this.close();
+                    }
+                })){
+                    location.reload();
+                }
+
+            });
+        </script>
 </head>
 <!--Coded With Love By Mutiullah Samim-->
 
@@ -71,8 +107,8 @@
                                 <span class="online_icon"></span>
                             </div>
                             <div class="user_info">
-                                <span>Chat with Khalid</span>
-                                <p>1767 Messages</p>
+                                <span>{{$reciever->name}}</span>
+                                <p>total {{$message_count}} messages</p>
                             </div>
                             <div class="video_cam">
                                 <span><i class="fas fa-video"></i></span>
@@ -90,28 +126,34 @@
                         </div>
                     </div>
                     <div class="card-body msg_card_body">
+                        @foreach ($chat_other as $recivy)
+
+                        @if ($recivy->sender != $users->id)
                         <div class="d-flex justify-content-start mb-4">
                             <div class="img_cont_msg">
                                 <img src="/img/user2.jpeg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
-                                Hi, how are you samim?
-                                <span class="msg_time">8:40 AM, Today</span>
+                                {{$recivy->message}}
+                                <span class="msg_time"> {{$recivy->created_at}}</span>
                             </div>
                         </div>
+                        @endif
+                        @if ($recivy->sender == $users->id)
                         <div class="d-flex justify-content-end mb-4">
                             <div class="msg_cotainer_send">
-                                Hi Khalid i am good tnx how about you?
-                                <span class="msg_time_send">8:55 AM, Today</span>
+                                {{$recivy->message}}
+                                <span class="msg_time_send">{{$recivy->created_at}}</span>
                             </div>
                             <div class="img_cont_msg">
                                 <img src="/img/user.png" class="rounded-circle user_img_msg">
                             </div>
                         </div>
-
+                        @endif
+                        @endforeach
                     </div>
                     <div class="card-footer">
-            <form  method="POST" id="chat_form">
+            <form action="{{url('/store_comment')}}" method="POST" id="chat_form">
                 @csrf
 
                         <div class="input-group">
@@ -121,13 +163,11 @@
                             <input type="text" class="form-control type_msg" name="message" id="message" aria-describedby="helpId"
                             placeholder="     @error('message')
                             {{ $message=" nothing to send" }}
-                            @endif">
+                            @endif" autocomplete="off">
                             <input type="text" class="form-control" name="reciever" id="reciever" aria-describedby="helpId"
-                            placeholder="" value="here we set another user id" hidden>
+                            placeholder="" value="{{ $reciever->id }}" hidden>
                         <input type="text" class="form-control" name="sender" id="sender" aria-describedby="helpId"
                             placeholder="" value="{{ $users->id }}" hidden>
-
-
                             {{-- <textarea name="" class="form-control type_msg"
                                 placeholder="Type your message..."></textarea> --}}
                             <div class="input-group-append">

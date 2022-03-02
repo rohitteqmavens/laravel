@@ -34,11 +34,12 @@ Route::get('test', function () {
     event(new App\Events\StatusLiked('Someone'));
     return "Event has been sent!";
 });
-Route::get('user_first',[PushController::class,'user_first']);
-Route::get('dash/{id}',[PushController::class,'chat']);
+// Route::get('user_first',[PushController::class,'user_first']);
+// Route::get('dash/{id}',[PushController::class,'chat']);
 Route::post('/store_comment',[PushController::class,'send']);
 Route::get('/chat',[PushController::class,'home_page']);
-Route::post('/enterChat',[PushController::class,'enterChat']);
+
+Route::get('/chat_message/{id}',[PushController::class,'chat_message']);
 
 
 
